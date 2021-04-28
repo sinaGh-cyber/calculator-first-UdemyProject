@@ -1,7 +1,9 @@
-let cuurentResult = 0;
-let formola = `the formola is equle to = ${cuurentResult}`;
-function add (num1, num2) {
-    cuurentResult = cuurentResult + userInput.value;
-    outputResult(cuurentResult, ` `);
+const defaultResult = 0;
+let currentResult = defaultResult;
+
+function add() {
+  const calcDescription = `${currentResult} + ${userInput.value}`;
+  currentResult = currentResult + parseInt(userInput.value);
+  outputResult(currentResult, calcDescription);
 }
-addBtn.addEventListener(`click`, add);
+addBtn.addEventListener('click', add);
