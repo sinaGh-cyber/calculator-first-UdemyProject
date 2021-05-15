@@ -1,7 +1,7 @@
 let currentResult = 0;
 logEntries = [];
 
-function getUserNumber(){
+function getUserNumber() {
   const number = parseInt(userInput.value);
   return number;
 }
@@ -9,7 +9,7 @@ function creatAndWriteOutput(opreator, resultBeforCalc, calcNumber) {
   const calcDescription = `${resultBeforCalc}  ${opreator} ${calcNumber}`;
   outputResult(currentResult, calcDescription);
 }
-function writeToLog (
+function writeToLog(
   operationIdentifier,
   prevResult,
   operationNumber,
@@ -19,41 +19,32 @@ function writeToLog (
     operation: operationIdentifier,
     prevResult: prevResult,
     number: operationNumber,
-    result: newResult
+    result: newResult,
   };
   logEntries.push(logEntry);
   console.log(logEntries);
 }
-function add() {
+function colculate(operation) {
   initializResult = currentResult;
   enterdNumber = getUserNumber();
-  currentResult = initializResult + enterdNumber;
-  creatAndWriteOutput('+', initializResult, enterdNumber );
-  writeToLog(`ADD`, initializResult, enterdNumber, currentResult);
-  
+  let opreator;
+  if (operation === `ADD`) {
+    currentResult = initializResult + enterdNumber;
+    opreator = `+`;
+  } else if (operation === `SUBTRAC`) {
+    currentResult = initializResult - enterdNumber;
+    opreator = `-`;
+  } else if (operation === `MULTIPLY`) {
+    currentResult = initializResult * enterdNumber;
+    opreator = `*`;
+  } else if (operation === `DIVIDE`) {
+    currentResult = initializResult / enterdNumber;
+    opreator = `/`;
+  }
+  creatAndWriteOutput(opreator, initializResult, enterdNumber);
+  writeToLog(operation, initializResult, enterdNumber, currentResult);
 }
-function subtrac() {
-  initializResult = currentResult;
-  enterdNumber = getUserNumber();
-  currentResult = initializResult - enterdNumber;
-  creatAndWriteOutput('-', initializResult, enterdNumber );
-  writeToLog(`SUBTRAC`, initializResult, enterdNumber, currentResult);
-}
-function multiply() {
-  initializResult = currentResult;
-  enterdNumber = getUserNumber();
-  currentResult = initializResult * enterdNumber;
-  creatAndWriteOutput('*', initializResult, enterdNumber );
-  writeToLog(`MULTIPLY`, initializResult, enterdNumber, currentResult);
-}
-function divide() {
-  initializResult = currentResult;
-  enterdNumber = getUserNumber();
-  currentResult = initializResult / enterdNumber;
-  creatAndWriteOutput('/', initializResult, enterdNumber );
-  writeToLog(`DIVIDE`, initializResult, enterdNumber, currentResult);
-}
-addBtn.addEventListener('click', add);
-subtractBtn.addEventListener('click', subtrac);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+addBtn.addEventListener("click", colculate.bind(this, `ADD`));
+subtractBtn.addEventListener("click", colculate.bind(this, `SUBTRAC`));
+multiplyBtn.addEventListener("click", colculate.bind(this, `MULTIPLY`));
+divideBtn.addEventListener("click", colculate.bind(this, `DIVIDE`));
